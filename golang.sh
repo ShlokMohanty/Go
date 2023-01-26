@@ -63,3 +63,10 @@ IFS=" " read -ra KUBE_SERVER_TARGETS <<< "$(kube::golang::server_targets)"
 readonly KUBE_SERVER_TARGETS
 readonly KUBE_SERVER_BINARIES=("${KUBE_SERVER_TARGETS[@]##*/}")
 
+readonly KUBE_CLIENT_PLATFORMS 
+
+elif [[ "${KUBE_FASTBUILD:-}" == "true"]];then
+   host_arch=$(kube::util::host_arch)
+   if [[ "${host_arch}" != "amd64" && "${host_arch}" !="arm64" && "${host_arch}"!="ppc641e" && "${host_arch}"!="s390x" ]];then
+   host_arch="amd64"
+   fi
